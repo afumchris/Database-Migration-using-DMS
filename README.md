@@ -1,12 +1,12 @@
 # Database-Migration-using-DMS
 
 
-## Introduction:
+## Introduction
 
 In this repository, we are going to explore the architecture and migration procedure of a simple WordPress application from a simulated on-premises setup to Amazon Web Services (AWS). The migration process involves transferring WordPress content, adjusting permissions, and verifying the functionality of the website on AWS using a VPC peering connection established to enable communication between the on-premises network and AWS. Additionally, the Database Migration Service (DMS) is utilized for data migration from the on-premises database to the AWS database. Lastly, the steps to complete the cutover process for application migration to AWS are described, ensuring a successful transition of the application to the new environment.
 
 
-## SIMULATED ON-PREM ARCHITECTURE:
+## SIMULATED ON-PREM ARCHITECTURE
 
 The WordPress application is hosted on an Amazon Linux t2.micro instance within the on-prem VPC, configured with a /24 CIDR range. This instance provides computing capacity for running the application, with its assigned IPv4 address facilitating communication. Positioned within a public subnet, it benefits from internet connectivity, allowing users worldwide to access the WordPress site. To ensure secure access, the instance is configured with a dedicated security group that allows inbound traffic on TCP port 80 for HTTP from any source on the internet, enabling access to web services hosted on the instance.
 
@@ -17,7 +17,7 @@ Routing and the internet gateway play a crucial role in enabling communication w
 To grant the WordPress application specific permissions and fine-grained access control, we utilize an IAM role. This role defines the precise privileges the application holds within the AWS environment. Additionally, the IAM role is configured to enable the application to access required parameters stored in the AWS Parameter Store. The AWS Parameter Store serves as a centralized and secure repository for web application configurations, ensuring streamlined management and retrieval of crucial parameters for the WordPress application.
 
 
-## AWS ARCHITECTURE: 
+## AWS ARCHITECTURE
 
 The architecture on AWS consists of an Amazon Linux t2.micro instance within a Virtual Private Cloud(VPC), configured with a /16 CIDR range. The instance will be assigned an IPv4 address for communication purposes and will reside in a public subnet within the VPC.
 
@@ -43,7 +43,7 @@ Moreover, we will integrate the IAM role with the AWS Parameter Store. This inte
 
 
 
-## VPC PEERING CONNECTION:
+## VPC PEERING CONNECTION
 
 In order to establish connectivity between an on-premises network and AWS, several networking components need to be set up and configured. These components play a crucial role in enabling communication between the two environments and ensuring data transfer.
 
@@ -58,7 +58,7 @@ Similarly, on the AWS side, you configure routes within the awsPublicRT and awsP
 By configuring routes on both sides, you establish two-way traffic flow, ensuring that data transfer can occur between the on-premises network and AWS. This two-way communication is essential for applications and services that rely on exchanging data between the two environments.
 
 
-## MIGRATING THE WORDPRESS APPLICATION: 
+## MIGRATING THE WORDPRESS APPLICATION
 
 Once the peering connection is established, with the WordPress requirements fulfilled, the migration of WordPress content from the on-premises environment to AWS can proceed. This process involves editing the SSH configuration temporarily to allow password authentication, setting up a temporary password, and copying the WordPress files from the on-premises server to the AWS instance using secure copy (SCP).
 
@@ -67,7 +67,7 @@ After migrating the WordPress content, permissions are adjusted to ensure proper
 Finally, the functionality of the WordPress website on AWS is verified. The web instance hosted on AWS, utilizing the on-premises database, is accessed by navigating to the provided public IPv4 DNS address. If the website loads correctly, it confirms the successful migration and functionality of the WordPress website on AWS.
 
 
-## MIGRATING THE DATA USING DMS: 
+## MIGRATING THE DATA USING DMS
 
 The Database Migration Service (DMS) is utilized to migrate data between the on-premises database and AWS. Within the DMS setup, several networking components and configurations are involved.
 
@@ -86,7 +86,7 @@ Testing the connections is an essential step to ensure the viability and reliabi
 Once the connections have been tested successfully, the migration task can be initiated. This task involves the transfer of data from the on-premises database to the AWS database, utilizing the DMS replication instance. The task moves from the “Running State” to "Load Complete". At this point, the data migration is deemed successful, and the data has been effectively transferred to the AWS database.
 
 
-## COMPLETE CUTOVER PROCESS FOR APPLICATION MIGRATION TO AWS: 
+## COMPLETE CUTOVER PROCESS FOR APPLICATION MIGRATION TO AWS
 
 To complete the cutover process and ensure the application's functionality, several steps are taken.
 
@@ -100,6 +100,6 @@ Once the script has been executed, the EC2 console is revisited to perform the n
 
 Finally, the AWS WordPress application instance is selected again, and its Public IPv4 DNS is noted down. Opening this DNS in a new tab confirms that the application is still accessible. This indicates a successful cutover, with the application now pointed at the RDS instance after a full migration. 
 
-## INSTRUCTIONS: 
+## INSTRUCTIONS
 
 Visit this [link](https://github.com/acantril/learn-cantrill-io-labs/tree/master/aws-dms-database-migration) for video guide and text instructions.
