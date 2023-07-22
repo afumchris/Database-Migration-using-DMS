@@ -46,8 +46,9 @@ To manage permissions and access control, the WordPress application will utilize
 Moreover, we will integrate the IAM role with the AWS Parameter Store. This integration will allow the application to securely access the necessary parameters stored within the Parameter Store.
 
 
-
 ## VPC PEERING CONNECTION
+
+![](peering-connection.png)
 
 In order to establish connectivity between an on-premises network and AWS, several networking components need to be set up and configured. These components play a crucial role in enabling communication between the two environments and ensuring data transfer.
 
@@ -91,6 +92,8 @@ Once the connections have been tested successfully, the migration task can be in
 
 
 ## COMPLETE CUTOVER PROCESS FOR APPLICATION MIGRATION TO AWS
+
+![](cutover.png)
 
 To complete the cutover process and ensure the application's functionality, several steps are taken.
 
