@@ -8,6 +8,8 @@ In this repository, we are going to explore the architecture and migration proce
 
 ## SIMULATED ON-PREM ARCHITECTURE
 
+![](on-prem-architecture.png)
+
 The WordPress application is hosted on an Amazon Linux t2.micro instance within the on-prem VPC, configured with a /24 CIDR range. This instance provides computing capacity for running the application, with its assigned IPv4 address facilitating communication. Positioned within a public subnet, it benefits from internet connectivity, allowing users worldwide to access the WordPress site. To ensure secure access, the instance is configured with a dedicated security group that allows inbound traffic on TCP port 80 for HTTP from any source on the internet, enabling access to web services hosted on the instance.
 
 The MariaDB database, powering the on-prem WordPress application, is hosted on an EC2 instance within the same public subnet. Similar to the WordPress instance, the EC2 instance hosting the database possesses an IPv4 address for communication. To establish secure communication between the WordPress application and the MariaDB database, a security group is assigned to the database  EC2 instance, allowing inbound TCP traffic on port 3306 from anywhere on the internet. This configuration ensures efficient storage and retrieval of data for the WordPress application.
@@ -18,6 +20,8 @@ To grant the WordPress application specific permissions and fine-grained access 
 
 
 ## AWS ARCHITECTURE
+
+![](AWS-architecture.png)
 
 The architecture on AWS consists of an Amazon Linux t2.micro instance within a Virtual Private Cloud(VPC), configured with a /16 CIDR range. The instance will be assigned an IPv4 address for communication purposes and will reside in a public subnet within the VPC.
 
