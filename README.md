@@ -65,6 +65,8 @@ By configuring routes on both sides, you establish two-way traffic flow, ensurin
 
 ## MIGRATING THE WORDPRESS APPLICATION
 
+![](wordpress-sync.png)
+
 Once the peering connection is established, with the WordPress requirements fulfilled, the migration of WordPress content from the on-premises environment to AWS can proceed. This process involves editing the SSH configuration temporarily to allow password authentication, setting up a temporary password, and copying the WordPress files from the on-premises server to the AWS instance using secure copy (SCP).
 
 After migrating the WordPress content, permissions are adjusted to ensure proper access and security. The correct permissions are enforced on the copied files, this step ensures that the WordPress files are accessible and secure within the AWS environment.
@@ -73,6 +75,8 @@ Finally, the functionality of the WordPress website on AWS is verified. The web 
 
 
 ## MIGRATING THE DATA USING DMS
+
+![](DMS.png)
 
 The Database Migration Service (DMS) is utilized to migrate data between the on-premises database and AWS. Within the DMS setup, several networking components and configurations are involved.
 
