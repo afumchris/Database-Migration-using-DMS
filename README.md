@@ -23,27 +23,21 @@ To grant the WordPress application specific permissions and fine-grained access 
 
 ![](Architectural-diagrams/AWS-architecture.png)
 
-The architecture on AWS consists of an Amazon Linux t2.micro instance within a Virtual Private Cloud(VPC), configured with a /16 CIDR range. The instance will be assigned an IPv4 address for communication purposes and will reside in a public subnet within the VPC.
+The architecture on AWS consists of an Amazon Linux t2.micro instance within a Virtual Private Cloud(VPC), configured with a /16 CIDR range. The instance will be assigned an IPv4 address for communication purposes and will reside in a public subnet within the VPC. To ensure high availability and fault tolerance, the resources are deployed across two availability zones (AZs). This means that the Amazon Linux instance and other resources will be provisioned in separate AZs, reducing the risk of a single point of failure and increasing the overall resilience of the architecture.
 
 For secure access and administration, a security group will be associated with the instance. This security group will allow HTTP traffic (TCP port 80) and SSH traffic (TCP port 22) from anywhere on the internet. This configuration ensures that users can access the WordPress site and enables secure remote administration of the instance.
 
-To provide persistent storage for the WordPress application and its data, we will attach an Elastic Block Store (EBS) volume to the EC2 instance. This EBS volume will offer reliable and scalable storage capabilities.
+In other to provide persistent storage for the WordPress application and its data, an Elastic Block Store (EBS) volume is attached to the EC2 instance. This EBS volume will offer reliable and scalable storage capabilities.
 
-Ensure that the necessary software requirements for WordPress, such as PHP, MySQL client, and other dependencies, are installed on the instance to support seamless operation.
-
-To accommodate the database needs of the WordPress application, set up a MariaDB database on an RDS instance. The RDS instance will be placed within a private subnet in the same VPC, ensuring that it is accessible only from within the VPC and not from the public internet, thereby making it more secure.
+A MariaDB database on an RDS instance is set up to accommodate the database needs of the WordPress application. The RDS instance will be placed within a private subnet in the same VPC, ensuring that it is accessible only from within the VPC and not from the public internet, thereby making it more secure.
 
 To establish secure communication between the WordPress application and the database, a security group associated with the RDS instance will allow MySQL/Aurora TCP traffic on port 3306 from anywhere.
 
-In the VPC configuration, create two subnets, a public subnet and a private subnet. The public subnet will be designated for the WordPress application EC2 instance, while the private subnet will house the RDS instance.
-
-To enable internet access for the WordPress application, the public subnet will be assigned a route table that directs traffic to and from the internet using an Internet Gateway (IGW).
+Enabling internet access for the WordPress application, the public subnet will be assigned a route table that directs traffic to and from the internet using an Internet Gateway (IGW).
 
 Conversely, the private subnet will have a route table configured to handle local VPC traffic, facilitating communication between instances within the VPC while restricting direct internet access for enhanced security.
 
-To manage permissions and access control, the WordPress application will utilize an IAM role. This role will be configured to grant the application specific permissions as required.
-
-Moreover, we will integrate the IAM role with the AWS Parameter Store. This integration will allow the application to securely access the necessary parameters stored within the Parameter Store.
+To manage permissions and access control, the WordPress application will utilize an IAM role. This role will be configured to grant the application specific permition to securely access the necessary parameters stored within the Parameter Store.
 
 
 ## VPC PEERING CONNECTION
@@ -67,7 +61,7 @@ By configuring routes on both sides, you establish two-way traffic flow, ensurin
 
 ![](Architectural-diagrams/wordpress-sync.png)
 
-Once the peering connection is established, with the WordPress requirements fulfilled, the migration of WordPress content from the on-premises environment to AWS can proceed. This process involves editing the SSH configuration temporarily to allow password authentication, setting up a temporary password, and copying the WordPress files from the on-premises server to the AWS instance using secure copy (SCP).
+Once the peering connection is established, ensure that the necessary software requirements for WordPress, such as PHP, MySQL client, and other dependencies, are installed on the instance to support seamless operation, with the WordPress requirements fulfilled, the migration of WordPress content from the on-premises environment to AWS can proceed. This process involves editing the SSH configuration temporarily to allow password authentication, setting up a temporary password, and copying the WordPress files from the on-premises server to the AWS instance using secure copy (SCP).
 
 After migrating the WordPress content, permissions are adjusted to ensure proper access and security. The correct permissions are enforced on the copied files, this step ensures that the WordPress files are accessible and secure within the AWS environment.
 
