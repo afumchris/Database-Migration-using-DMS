@@ -74,13 +74,13 @@ Finally, the functionality of the WordPress website on AWS is verified. The web 
 
 The Database Migration Service (DMS) is utilized to migrate data between the on-premises database and AWS. Within the DMS setup, several networking components and configurations are involved.
 
-First, the DMS replication instance plays a vital role in facilitating the data migration process. This instance acts as an intermediary, orchestrating the replication and transfer of data between the source and target databases. It ensures the proper routing and transfer of data packets.
+First, the [DMS replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html) plays a vital role in facilitating the data migration process. This instance acts as an intermediary, orchestrating the replication and transfer of data between the source and target databases. It ensures the proper routing and transfer of data packets.
 
 To setup the DMS instance for migration, begin by specifying the AWS Virtual Private Cloud (VPC) where the Replication Instance will be deployed. Here, opt for the "dev or test workload (single AZ)" in the MultiAZ option, strategically setting up the Replication Instance within a single Availability Zone. This approach is ideal for non-production environments, providing a reliable and controlled setting for the migration process.
 
 Within the DMS setup, subnet groups are utilized. These subnet groups define the specific subnets within the VPC that the replication instance will use for its operations, the DMS setup also leverages security groups to fortify the migration process. By selecting the appropriate VPC security group, we gain precise control over inbound and outbound traffic, also unchecking the "Publicly Accessible" option, we add an extra layer of protection, ensuring that the replication instance remains accessible only within the specified network environment. Associating the replication instance with the appropriate subnet group and security group, communication are established between the DMS service and the databases.
 
-Furthermore, the creation of source and target endpoints is crucial. The source endpoint represents the on-premises database, while the target endpoint represents the AWS database. These endpoints are responsible for establishing the connection between the source and target databases, enabling the migration of data.
+Furthermore, the creation of [source and target](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.Creating.html) endpoints is crucial. The source endpoint represents the on-premises database, while the target endpoint represents the AWS database. These endpoints are responsible for establishing the connection between the source and target databases, enabling the migration of data.
 
 The endpoints are configured with specific connection details, such as the server name, port, and access credentials. These configurations ensure that the DMS service can access and communicate with the databases on both sides.
 
@@ -107,4 +107,4 @@ Finally, the AWS WordPress application instance is selected again, and its Publi
 
 ## INSTRUCTIONS
 
-Visit [](https://github.com/acantril/learn-cantrill-io-labs/tree/master/aws-dms-database-migration) for video guide and text instructions.
+Visit [acantril/learn-cantrill-io-labs](https://github.com/acantril/learn-cantrill-io-labs/tree/master/aws-dms-database-migration) for video guide and text instructions.
